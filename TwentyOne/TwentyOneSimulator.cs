@@ -8,7 +8,9 @@ namespace TwentyOne
         {
             try
             {
-                System.Console.WriteLine("TEST");
+                Card test = new Card(CardRank.Ace, CardSuit.Spades);
+
+                System.Console.WriteLine(test.ToString());
             }
             catch (Exception e)
             { 
