@@ -43,6 +43,6 @@ namespace TwentyOne
             Suit = suit;
         }
 
-        public override string ToString() => $"{CardValue} {CardSymbol}";
+        public override string ToString() => $"{Rank} {CardSymbol}";
     }
 }
