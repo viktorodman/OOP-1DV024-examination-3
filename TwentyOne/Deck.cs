@@ -19,7 +19,10 @@ namespace TwentyOne
         /// <returns></returns>
         private List<Card> _cards = new List<Card>(52);
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public int DeckCount 
         {
             get => _cards.Count;
@@ -39,6 +42,10 @@ namespace TwentyOne
             }
         }
 
+        /// <summary>
+        /// Draws the top card of the deck
+        /// </summary>
+        /// <returns></returns>
         public Card DrawCard() 
         {
             if (_cards.Count == 1)
