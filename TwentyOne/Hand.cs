@@ -16,13 +16,30 @@ namespace TwentyOne
         /// <returns></returns>
         private List<Card> _cards = new List<Card>(Constants.HandMaxCapacity);
 
+        private List<int> _cardValues = new List<int>(Constants.HandMaxCapacity);
+
         public int HandValue
         {
             get
             {
-               int handSum = _cards.Aggregate(0, (acc, card) => acc + card.CardValue);
+               
 
-               return 
+               if (SumOfCardValues() > Constants.BustValue)
+               {
+                   for (int i = 0; i < _cards.Count; i++)
+                   {
+                       if (_cards[i].Rank == CardRank.Ace)
+                       {
+                           _cardValues[i] = 1;
+                       }
+                       if (SumOfCardValues() <= Constants.BustValue)
+                       {
+                           break;
+                       }
+                   }
+               }
+
+               return SumOfCardValues();
             }
         }
 
@@ -33,7 +50,10 @@ namespace TwentyOne
                throw new IndexOutOfRangeException("Hand cant have more than five items");
            }
             _cards.Add(card);
+            _cardValues.Add((int)card.Rank);
        }
+
+       private int SumOfCardValues() => _cardValues.Aggregate(0, (acc, cardValue) => acc + cardValue);
 
 
 

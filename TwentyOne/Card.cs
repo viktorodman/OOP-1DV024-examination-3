@@ -1,3 +1,5 @@
+using System;
+
 namespace TwentyOne
 {
     /// <summary>
@@ -14,17 +16,6 @@ namespace TwentyOne
         /// The cards suit
         /// </summary>
         public CardSuit Suit {get; private set;}
-
-        /// <summary>
-        /// Represents the cards value
-        /// </summary>
-        /// <value></value>
-        public int Value 
-        {
-            get => (int)Rank;
-
-            set => 
-        }
 
         public string CardSymbol
         {

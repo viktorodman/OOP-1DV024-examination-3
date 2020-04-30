@@ -10,9 +10,9 @@ namespace TwentyOne
             {
                 Player p = new Player("Pelle");
 
-                p.Hit(new Card(CardRank.Ace, CardSuit.Spades));
-                p.Hit(new Card(CardRank.Eight, CardSuit.Hearts));
-                p.Hit(new Card(CardRank.Four, CardSuit.Diamonds));
+                p.Hit(new Card(CardRank.Ten, CardSuit.Spades));
+                p.Hit(new Card(CardRank.Nine, CardSuit.Hearts));
+                p.Hit(new Card(CardRank.Two, CardSuit.Diamonds));
 
                 System.Console.WriteLine(p.HandCount());
             }
