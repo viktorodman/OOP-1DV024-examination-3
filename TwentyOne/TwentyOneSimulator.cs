@@ -10,6 +10,8 @@ namespace TwentyOne
             {
                 Deck d = new Deck();
 
+                d.Shuffle();
+
                 System.Console.WriteLine(d.ToString());
             }
             catch (Exception e)
