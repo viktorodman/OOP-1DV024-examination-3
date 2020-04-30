@@ -2,6 +2,9 @@ using System;
 
 namespace TwentyOne
 {
+    /// <summary>
+    /// The possible card ranks
+    /// </summary>
     public enum CardRank
     {
         Two = 2,

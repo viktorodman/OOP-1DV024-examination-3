@@ -4,23 +4,26 @@ using System.Collections.Generic;
 
 namespace TwentyOne
 {
+    /// <summary>
+    /// Represents a deck
+    /// </summary>
     public class Deck
     {   
         /// <summary>
         /// Instantiate random number generator
         /// </summary>
         /// <returns></returns>
-        private readonly Random random = new Random();
+        private readonly Random _random = new Random();
 
         /// <summary>
         /// A list of cards
         /// </summary>
         /// <typeparam name="Card"></typeparam>
         /// <returns></returns>
-        private List<Card> _cards = new List<Card>(52);
+        private List<Card> _cards = new List<Card>(Constants.DeckMaxCapacity);
         
         /// <summary>
-        /// 
+        /// The number of cards in the deck
         /// </summary>
         /// <value></value>
         public int DeckCount 
@@ -71,7 +74,7 @@ namespace TwentyOne
             while (n > 1)
             {
                 n--;
-                int k = random.Next(n + 1);
+                int k = _random.Next(n + 1);
                 Card value = _cards[k];
                 _cards[k] = _cards[n];
                 _cards[n] = value;
