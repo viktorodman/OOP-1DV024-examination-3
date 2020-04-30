@@ -10,9 +10,17 @@ namespace TwentyOne
             {
                 Deck d = new Deck();
 
-                d.Shuffle();
+                System.Console.WriteLine(d.DeckCount);
 
-                System.Console.WriteLine(d.ToString());
+                d.DrawCard();
+
+                System.Console.WriteLine(d.DeckCount);
+
+                d.DrawCard();
+
+                System.Console.WriteLine(d.DeckCount);
+
+                /* System.Console.WriteLine(d.ToString()); */
             }
             catch (Exception e)
             { 
