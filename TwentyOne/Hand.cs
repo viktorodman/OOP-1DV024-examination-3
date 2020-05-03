@@ -43,6 +43,11 @@ namespace TwentyOne
             }
         }
 
+        public bool IsFull
+        {
+            get => _cards.Count == 5;
+        }
+
        public void AddCard(Card card)
        {
            if(_cards.Count == 5)

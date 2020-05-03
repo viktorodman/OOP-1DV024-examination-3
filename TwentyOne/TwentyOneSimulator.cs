@@ -8,13 +8,17 @@ namespace TwentyOne
         {
             try
             {
-                Player p = new Player("Pelle");
+               /*  Player p = new Player("Pelle", 15);
 
                 p.Hit(new Card(CardRank.Ten, CardSuit.Spades));
                 p.Hit(new Card(CardRank.Nine, CardSuit.Hearts));
                 p.Hit(new Card(CardRank.Two, CardSuit.Diamonds));
 
-                System.Console.WriteLine(p.HandCount());
+                System.Console.WriteLine(p.HandCount()); */
+
+                Game game = new Game(5);
+
+                game.RunGame();
             }
             catch (Exception e)
             { 

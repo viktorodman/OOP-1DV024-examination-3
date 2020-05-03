@@ -31,6 +31,11 @@ namespace TwentyOne
             get => _cards.Count;
         }
 
+        public bool IsLastCard
+        {
+            get => _cards.Count == 1;
+        }
+
         /// <summary>
         /// Initializes a new instance of Deck
         /// </summary>

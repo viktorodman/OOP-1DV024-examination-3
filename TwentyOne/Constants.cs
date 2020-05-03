@@ -6,5 +6,7 @@ namespace TwentyOne
         public const int HandMaxCapacity = 5;
 
         public const int BustValue = 21;
+
+        public const int NumberOfSeats = 5;
     }
 }
