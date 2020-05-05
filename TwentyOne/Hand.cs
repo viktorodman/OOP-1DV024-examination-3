@@ -45,17 +45,26 @@ namespace TwentyOne
 
         public bool IsFull
         {
-            get => _cards.Count == 5;
+            get => _cards.Count == Constants.HandMaxCapacity;
         }
 
        public void AddCard(Card card)
        {
-           if(_cards.Count == 5)
+           if(IsFull)
            {
                throw new IndexOutOfRangeException("Hand cant have more than five items");
            }
             _cards.Add(card);
             _cardValues.Add((int)card.Rank);
+       }
+
+       public List<Card> EmptyHand()
+       {
+           List<Card> cardsOnHand = new List<Card>();
+           cardsOnHand.AddRange(_cards);
+           _cards.Clear();
+
+           return cardsOnHand;
        }
 
        private int SumOfCardValues() => _cardValues.Aggregate(0, (acc, cardValue) => acc + cardValue);

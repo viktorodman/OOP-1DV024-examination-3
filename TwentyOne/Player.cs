@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TwentyOne
 {
@@ -33,7 +34,7 @@ namespace TwentyOne
 
             private set 
             {
-                if (value <= 0 || value > 21)
+                if (value <= 0 || value > Constants.BustValue)
                 {
                     throw new InvalidOperationException("Stop value must be between 1 and 21");
                 }
@@ -42,25 +43,41 @@ namespace TwentyOne
             } 
         }
 
+        public int Score
+        {
+            get => _hand.HandValue;
+        }
+
+        public bool HasTwentyOne
+        {
+            get => _hand.HandValue == Constants.BustValue;   
+        }
+
+        public bool IsBusted
+        {
+            get => _hand.HandValue > Constants.BustValue;
+        }
+
         public bool IsDone
         {
-            get => _hand.HandValue < StopValue && !_hand.IsFull;
-        }
-
-        public int HandCount()
-        {
-            return _hand.HandValue;
-        }
-
-        public void Hit(Card card)
-        {
-            _hand.AddCard(card);
+            get => _hand.HandValue >= StopValue || _hand.IsFull;
         }
 
         public Player(string name, int stopValue)
         {
             Name = name;
             StopValue = stopValue;
+        }
+
+        public List<Card> ThrowCards()
+        {
+            return _hand.EmptyHand();
+        }
+
+        public void Hit(Card card)
+        {
+            _hand.AddCard(card);
+
         }
 
         public override string ToString() => $"{Name}: {_hand}";
