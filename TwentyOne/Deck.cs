@@ -9,11 +9,7 @@ namespace TwentyOne
     /// </summary>
     public class Deck
     {   
-        /// <summary>
-        /// Instantiate random number generator
-        /// </summary>
-        /// <returns></returns>
-        private readonly Random _random = new Random();
+        
 
         /// <summary>
         /// A list of cards
@@ -36,6 +32,24 @@ namespace TwentyOne
             get => _cards.Count == 1;
         }
 
+        public Card TopCard
+        {
+            get
+            {
+                if (IsLastCard)
+                {
+                    throw new IndexOutOfRangeException("Cant draw the last card");
+                }
+
+                Card topCard = _cards[0];
+                _cards.RemoveAt(0);
+
+                return topCard;
+            }
+        }
+
+        public List<Card> Cards {get;}
+
         /// <summary>
         /// Initializes a new instance of Deck
         /// </summary>
@@ -50,41 +64,13 @@ namespace TwentyOne
             }
         }
 
-        /// <summary>
-        /// Draws the top card of the deck
-        /// </summary>
-        /// <returns></returns>
-        public Card DrawCard() 
+
+         public void AddCards(List<Card> cards)
         {
-            if (_cards.Count == 1)
-            {
-                throw new IndexOutOfRangeException("Cant draw the last card");
-            }
-            Card topCard = _cards[0];
-            _cards.RemoveAt(0);
-            return topCard;
+            _cards.AddRange(cards);
         }
 
-        /// <summary>
-        /// Fisher Yates shuffle
-        /// 
-        /// Shuffles the cards in the deck
-        /// 
-        /// Source: https://stackoverflow.com/questions/273313/randomize-a-listt/1262619#1262619
-        /// 
-        /// </summary>
-        public void Shuffle()
-        {
-            int n = _cards.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = _random.Next(n + 1);
-                Card value = _cards[k];
-                _cards[k] = _cards[n];
-                _cards[n] = value;
-            }
-        }
+        
 
         /// <summary>
         /// Returns the deck as a string

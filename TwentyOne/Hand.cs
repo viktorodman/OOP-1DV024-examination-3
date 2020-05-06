@@ -60,9 +60,10 @@ namespace TwentyOne
 
        public List<Card> EmptyHand()
        {
-           List<Card> cardsOnHand = new List<Card>();
-           cardsOnHand.AddRange(_cards);
-           _cards.Clear();
+            List<Card> cardsOnHand = new List<Card>();
+            cardsOnHand.AddRange(_cards);
+            _cards.Clear();
+            _cardValues.Clear();
 
            return cardsOnHand;
        }

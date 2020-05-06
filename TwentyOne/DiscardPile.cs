@@ -18,5 +18,15 @@ namespace TwentyOne
             _cards.AddRange(cards);
         }
 
+
+        public List<Card> EmptyDiscardPile()
+       {
+           List<Card> cardsInDiscardPile = new List<Card>();
+           cardsInDiscardPile.AddRange(_cards);
+           _cards.Clear();
+
+           return cardsInDiscardPile;
+       }
+
     }
 }

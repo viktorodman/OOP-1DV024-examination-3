@@ -9,15 +9,13 @@ namespace TwentyOne
         
         private List<Player> _players = new List<Player>(Constants.NumberOfSeats);
 
-        private Deck _deck = new Deck();
-
-        private DiscardPile _discardPile = new DiscardPile();
-
-        private Dealer _dealer = new Dealer("Dealer", 15);
+        private Dealer _dealer = new Dealer(15);
 
         private Player _roundWinner;
 
         private Player _roundLoser;
+
+        private GameView _gameView = new GameView();
 
 
         public Game(int numberOfPlayers)
@@ -25,22 +23,18 @@ namespace TwentyOne
             _players.AddRange(Enumerable
                     .Repeat(0, numberOfPlayers)
                     .Select((x, i) => new Player($"Player {i + 1}", 15)));
-            
-            _deck.Shuffle();
         }
 
         public void RunGame()
         {
-            FirstRound();
-            /* PlayAgainstDealer(_players[0], _dealer); */
-            
-
+            _dealer.ShuffleDeck();
+            _dealer.DealStartingCards(_players);
             foreach (Player player in _players)
             {
                 PlayAgainstDealer(player, _dealer);
+                _gameView.DisplayResult(_roundWinner, _roundLoser);
+                _dealer.CollectUsedCards(player.ThrowCards());
             }
-
-            
         }
 
         private void PlayAgainstDealer (Player player, Dealer dealer)
@@ -49,38 +43,23 @@ namespace TwentyOne
 
             if (!RoundHasWinner(player, dealer))
             {
-                DrawCards(dealer);
+                dealer.DrawCards();
 
                 if (!RoundHasWinner(dealer, player))
                 {
                     CompareCards(player, dealer);
                 }
             }
-
-
-
-            System.Console.WriteLine($"Winner: {_roundWinner} Score: {_roundWinner.Score}");
-            System.Console.WriteLine($"Loser: {_roundLoser} Score: {_roundLoser.Score}");
-
-            _discardPile.AddCards(player.ThrowCards());
-            _discardPile.AddCards(dealer.ThrowCards());
-
-            System.Console.WriteLine($"Number in Deck {_deck.DeckCount}");
-            System.Console.WriteLine($"Number in Discard {_discardPile.DeckCount}");
         }
 
 
         private void DrawCards (Player player) 
         {
-            do
+            while (player.ShouldHit)
             {
-                if (!_deck.IsLastCard)
-                {
-                    player.Hit(_deck.DrawCard());
-                } else {
-                    System.Console.WriteLine("Deck empty");
-                }
-            } while (!player.IsDone);
+                Card drawnCard = _dealer.DealCard();
+                player.ReceiveCard(drawnCard);
+            }
         }
 
         private void CompareCards(Player player, Dealer dealer)
@@ -116,13 +95,5 @@ namespace TwentyOne
 
             return roundHasWinner;
         }
-
-        private void PrepareNewRound(Player player, Dealer dealer)
-        {
-            
-        }
-        
-        private void FirstRound() => _players.ForEach(player => player.Hit(_deck.DrawCard()));
-        
     }
 }

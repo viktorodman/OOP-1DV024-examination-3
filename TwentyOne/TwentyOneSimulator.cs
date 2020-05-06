@@ -16,7 +16,7 @@ namespace TwentyOne
 
                 System.Console.WriteLine(p.HandCount()); */
 
-                Game game = new Game(5);
+                Game game = new Game(20);
 
                 game.RunGame();
             }

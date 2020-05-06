@@ -8,7 +8,7 @@ namespace TwentyOne
     /// </summary>
     public class Player
     {
-        private Hand _hand = new Hand();
+        protected Hand _hand = new Hand();
 
         private string _name;
 
@@ -58,9 +58,9 @@ namespace TwentyOne
             get => _hand.HandValue > Constants.BustValue;
         }
 
-        public bool IsDone
+        public bool ShouldHit
         {
-            get => _hand.HandValue >= StopValue || _hand.IsFull;
+            get => _hand.HandValue < StopValue && !_hand.IsFull;
         }
 
         public Player(string name, int stopValue)
@@ -74,10 +74,9 @@ namespace TwentyOne
             return _hand.EmptyHand();
         }
 
-        public void Hit(Card card)
+        public void ReceiveCard(Card card)
         {
             _hand.AddCard(card);
-
         }
 
         public override string ToString() => $"{Name}: {_hand}";
