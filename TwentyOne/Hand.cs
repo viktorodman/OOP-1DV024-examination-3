@@ -16,8 +16,17 @@ namespace TwentyOne
         /// <returns></returns>
         private List<Card> _cards = new List<Card>(Constants.HandMaxCapacity);
 
+        /// <summary>
+        /// Represents the values of the cards on the hand
+        /// </summary>
+        /// <typeparam name="int"></typeparam>
+        /// <returns></returns>
         private List<int> _cardValues = new List<int>(Constants.HandMaxCapacity);
 
+        /// <summary>
+        /// The value of card on the hand
+        /// </summary>
+        /// <value></value>
         public int HandValue
         {
             get
@@ -43,11 +52,21 @@ namespace TwentyOne
             }
         }
 
+    
+        /// <summary>
+        /// Checks if the hand is full
+        /// </summary>
+        /// <value></value>
         public bool IsFull
         {
             get => _cards.Count == Constants.HandMaxCapacity;
         }
 
+
+        /// <summary>
+        /// Adds a card to the hand
+        /// </summary>
+        /// <param name="card"></param>
        public void AddCard(Card card)
        {
            if(IsFull)
@@ -58,6 +77,10 @@ namespace TwentyOne
             _cardValues.Add((int)card.Rank);
        }
 
+        /// <summary>
+        /// Removes and returns the card on the hand
+        /// </summary>
+        /// <returns></returns>
        public List<Card> EmptyHand()
        {
             List<Card> cardsOnHand = new List<Card>();
@@ -68,10 +91,17 @@ namespace TwentyOne
            return cardsOnHand;
        }
 
+        /// <summary>
+        /// Returns the sum of the card values on the hand.
+        /// </summary>
+        /// <returns></returns>
        private int SumOfCardValues() => _cardValues.Aggregate(0, (acc, cardValue) => acc + cardValue);
 
 
-
+        /// <summary>
+        /// A string representing the card on the hand
+        /// </summary>
+        /// <returns></returns>
        public override string ToString() => string.Join(", ", _cards);
     }
 }

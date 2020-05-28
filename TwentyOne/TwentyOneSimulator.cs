@@ -1,23 +1,27 @@
 using System;
+using System.Text.Encodings;
 
 namespace TwentyOne
 {
+    /// <summary>
+    /// Represents a twenty one simulator
+    /// </summary>
     public class TwentyOneSimulator
     {
+        /// <summary>
+        /// Starts a new game of twenty one
+        /// </summary>
         public void Run()
         {
             try
             {
-               /*  Player p = new Player("Pelle", 15);
+                int numberOfPlayers = GameInput.EnterNumberOfPlayers();
+                int dealerStopValue = GameInput.EnterPlayerStopValue("dealer");
 
-                p.Hit(new Card(CardRank.Ten, CardSuit.Spades));
-                p.Hit(new Card(CardRank.Nine, CardSuit.Hearts));
-                p.Hit(new Card(CardRank.Two, CardSuit.Diamonds));
+                int[] playerStopValues = GameInput.EnterPlayerStopValues(numberOfPlayers);
 
-                System.Console.WriteLine(p.HandCount()); */
 
-                Game game = new Game(20);
-
+                Game game = new Game(numberOfPlayers, dealerStopValue, playerStopValues);
                 game.RunGame();
             }
             catch (Exception e)

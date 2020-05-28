@@ -3,26 +3,37 @@ using System.Collections.Generic;
 
 namespace TwentyOne
 {
-    
+    /// <summary>
+    /// Represents a Dealer
+    /// </summary>
     public class Dealer: Player
     {
-        private Deck _deck = new Deck();
-
-        private DiscardPile _discardPile = new DiscardPile();
-
         /// <summary>
-        /// Instantiate random number generator
+        /// A deck of cards
         /// </summary>
         /// <returns></returns>
-        private readonly Random _random = new Random();
+        private Deck _deck = new Deck();
 
+        /// <summary>
+        /// A discard pile
+        /// </summary>
+        /// <returns></returns>
+        private DiscardPile _discardPile = new DiscardPile();
+
+       /// <summary>
+       /// Initializes a new instance of Dealer
+       /// </summary>
+       /// <param name="stopValue">The dealers stop value</param>
         public Dealer(int stopValue)
             :base("Dealer", stopValue)
         {
             // Empty
         }
 
-
+        /// <summary>
+        /// Deals one card each to a list of players
+        /// </summary>
+        /// <param name="players">A list of players</param>
         public void DealStartingCards(List<Player> players)
         {
             players.ForEach(player => player.ReceiveCard(DealCard()));
@@ -45,7 +56,10 @@ namespace TwentyOne
             }
         }
 
-
+        /// <summary>
+        /// Returns the top card of the deck
+        /// </summary>
+        /// <returns></returns>
         public Card DealCard()
         {
             if (_deck.IsLastCard)
@@ -56,6 +70,11 @@ namespace TwentyOne
             return _deck.TopCard;
         }
 
+        /// <summary>
+        /// Collects the passed player card and the dealers card
+        /// and adds them to the discard pile
+        /// </summary>
+        /// <param name="playerCards">A list of cards</param>
         public void CollectUsedCards(List<Card> playerCards)
         {
             _discardPile.AddCards(playerCards);
@@ -65,24 +84,13 @@ namespace TwentyOne
 
 
          /// <summary>
-        /// Fisher Yates shuffle
         /// 
         /// Shuffles the cards in the deck
-        /// 
-        /// Source: https://stackoverflow.com/questions/273313/randomize-a-listt/1262619#1262619
         /// 
         /// </summary>
         public void ShuffleDeck()
         {
-            int n = _deck.Cards.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = _random.Next(n + 1);
-                Card value = _deck.Cards[k];
-                _deck.Cards[k] = _deck.Cards[n];
-                _deck.Cards[n] = value;
-            }
+           _deck.ShuffleCards();
         }
     }
 }

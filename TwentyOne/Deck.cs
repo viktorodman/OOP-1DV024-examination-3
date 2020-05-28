@@ -10,6 +10,11 @@ namespace TwentyOne
     public class Deck
     {   
         
+         /// <summary>
+        /// Instantiate random number generator
+        /// </summary>
+        /// <returns></returns>
+        private readonly Random _random = new Random();
 
         /// <summary>
         /// A list of cards
@@ -18,20 +23,20 @@ namespace TwentyOne
         /// <returns></returns>
         private List<Card> _cards = new List<Card>(Constants.DeckMaxCapacity);
         
+       
         /// <summary>
-        /// The number of cards in the deck
+        /// Returns true if its only 1 card left in the deck
         /// </summary>
-        /// <value></value>
-        public int DeckCount 
-        {
-            get => _cards.Count;
-        }
-
+        /// <value>True or false</value>
         public bool IsLastCard
         {
             get => _cards.Count == 1;
         }
 
+        /// <summary>
+        /// Returns the top card of the deck
+        /// </summary>
+        /// <value></value>
         public Card TopCard
         {
             get
@@ -48,8 +53,6 @@ namespace TwentyOne
             }
         }
 
-        public List<Card> Cards {get;}
-
         /// <summary>
         /// Initializes a new instance of Deck
         /// </summary>
@@ -64,10 +67,34 @@ namespace TwentyOne
             }
         }
 
-
+        /// <summary>
+        /// Adds a list of cards to the deck
+        /// </summary>
+        /// <param name="cards"></param>
          public void AddCards(List<Card> cards)
         {
             _cards.AddRange(cards);
+        }
+
+        /// <summary>
+        /// Fisher Yates shuffle
+        /// 
+        /// Shuffles the cards in the deck
+        /// 
+        /// Source: https://stackoverflow.com/questions/273313/randomize-a-listt/1262619#1262619
+        /// 
+        /// </summary>
+        public void ShuffleCards()
+        {
+            int n = _cards.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = _random.Next(n + 1);
+                Card value = _cards[k];
+                _cards[k] = _cards[n];
+                _cards[n] = value;
+            }
         }
 
         
